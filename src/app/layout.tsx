@@ -12,7 +12,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Self checkout system",
-  description: "Mc Donalds -Self checkout system.",
+  description: "Mc Donalds - Self checkout system.",
 };
 
 export default function RootLayout({}: // children,
