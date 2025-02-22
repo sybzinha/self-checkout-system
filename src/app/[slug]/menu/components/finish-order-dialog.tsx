@@ -78,7 +78,7 @@ const FinishOrderDialog = ({ open, onOpenChange }: FinishOrderDialogProps) => {
       startTransition(async () => {
         await createOrder({
           consumptionMethod,
-          custumerCpf: data.cpf,
+          customerCpf: data.cpf,
           customerName: data.name,
           products,
           slug,

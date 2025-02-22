@@ -1,6 +1,7 @@
 "use server";
 
 import { ConsumptionMethod } from "@prisma/client";
+import { redirect } from "next/navigation";
 
 import { db } from "@/lib/prisma";
 
@@ -8,7 +9,7 @@ import { removeCpfPunctuation } from "../helpers/cpf";
 
 interface CreateOrderInput {
   customerName: string;
-  custumerCpf: string;
+  customerCpf: string;
   products: Array<{
     id: string;
     quantity: number;
@@ -41,8 +42,8 @@ export const createOrder = async (input: CreateOrderInput) => {
   await db.order.create({
     data: {
       status: "PENDING",
-      custumerName: input.customerName,
-      custumerCpf: removeCpfPunctuation(input.custumerCpf),
+      customerName: input.customerName,
+      customerCpf: removeCpfPunctuation(input.customerCpf),
       orderProducts: {
         createMany: {
           data: productsWithPricesAndQuantities,
@@ -56,4 +57,5 @@ export const createOrder = async (input: CreateOrderInput) => {
       restaurantId: restaurant.id,
     },
   });
+  redirect(`/${input.slug}/orders`);
 };
